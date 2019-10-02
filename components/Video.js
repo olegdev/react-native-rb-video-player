@@ -89,9 +89,14 @@ class Video extends Component {
   onLoad(data) {
     if (!this.state.loading) return;
     this.props.onLoad(data);
-    const { height, width } = data.naturalSize;
+    const { height, width, orientation } = data.naturalSize;
+
     const ratio =
-      height === "undefined" && width === "undefined" ? 9 / 16 : height / width;
+      height === "undefined" && width === "undefined"
+        ? 9 / 16
+        : orientation === "portrait"
+        ? width / height
+        : height / width;
     const inlineHeight = this.props.lockRatio
       ? Win.width / this.props.lockRatio
       : Win.width * ratio;

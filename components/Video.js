@@ -97,9 +97,14 @@ class Video extends Component {
         : orientation === "portrait"
         ? width / height
         : height / width;
-    const inlineHeight = this.props.lockRatio
+    let inlineHeight = this.props.lockRatio
       ? Win.width / this.props.lockRatio
       : Win.width * ratio;
+
+    if (this.props.maxHeight) {
+      inlineHeight = Math.min(this.props.maxHeight, inlineHeight);
+    }
+
     this.setState(
       {
         paused: !this.props.autoPlay,
@@ -511,7 +516,8 @@ Video.propTypes = {
   title: PropTypes.string,
   theme: PropTypes.object,
   resizeMode: PropTypes.string,
-  controlDuration: PropTypes.number
+  controlDuration: PropTypes.number,
+  maxHeight: PropTypes.number
 };
 
 Video.defaultProps = {

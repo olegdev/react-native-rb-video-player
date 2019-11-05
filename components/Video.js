@@ -448,6 +448,7 @@ class Video extends Component {
           onError={e => this.onError(e)}
           // onBuffer={() => this.onBuffer()} // Callback when remote video is buffering
           onTimedMetadata={e => onTimedMetadata(e)} // Callback when the stream receive some metadata
+          ignoreSilentSwitch="ignore"
         />
         {!hideControls && (
           <Controls
